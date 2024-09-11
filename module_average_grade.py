@@ -1,8 +1,5 @@
 # module_average_grade.py
 
-# Цель данной программы - автоматизировать процесс подсчета среднего балла для школьников,
-# используя списки и множества. 
-
 # Данные на входе
 grades = [
     [5, 3, 3, 5, 4],  # Оценки для "Aaron"
@@ -14,29 +11,28 @@ grades = [
 
 students = {'Johnny', 'Bilbo', 'Steve', 'Khendrik', 'Aaron'}  # Имена учеников
 
-# 1. Создание пустого словаря для хранения среднего балла
-average_grades = {}
-
-# 2. Объединение списка grades и множества students
-# Преобразуем множество в список для соответствия с порядком оценок
-students_list = list(students)  # Преобразуем множество в список
-
-# 3. Цикл для расчета среднего балла
-for i in range(len(grades)):
-    # Получаем имя ученика по индексу из students_list
-    student_name = students_list[i]  # Извлекаем имя ученика
-    # Вычисляем средний балл, используя функции sum() и len()
-    average_grade = sum(grades[i]) / len(grades[i])
+# Функция для создания словаря с именами и средними баллами
+def compute_average_grades(grades, students):
+    average_grades = {}  # Создаем пустой словарь для хранения средних баллов
     
-    # 4. Записываем средний балл в словарь
-    average_grades[student_name] = average_grade
+    # Преобразуем множество в упорядоченный список
+    students_list = sorted(students)  # Сортируем в алфавитном порядке
+    
+    for i in range(len(grades)):
+        student_name = students_list[i]  # Имя студента по индексу
+        average_grade = sum(grades[i]) / len(grades[i])  # Вычисляем средний балл
+        average_grades[student_name] = average_grade  # Сохраняем в словаре
 
-# Здесь мы используем функции sum() и len(), чтобы рассчитать средний балл.
-# Ключевой момент: индекс списка grades соответствует индексу в students_list,
-# так что они будут совпадать.
+    return average_grades
 
-# 5. Выводим результат на экран
-print(average_grades)
+# Основная функция программы
+def main():
+    # Получаем словарь средних баллов
+    average_grades = compute_average_grades(grades, students)
+    
+    # Выводим результаты на экран
+    print(average_grades)
 
-# Ожидаемый вывод:
-# {'Aaron': 4.0, 'Bilbo': 2.25, 'Johnny': 4.0, 'Khendrik': 3.6666666666666665, 'Steve': 4.8}
+# Запуск основной функции
+if __name__ == "__main__":
+    main()

@@ -1,26 +1,21 @@
-def ancient_cipher(n):
-    """
-    Генерирует пароль в зависимости от числа n, состоящий из пар,
-    сумма которых кратна n, исключая само n из пар.
-    """
-    result = ""
+def generate_password(n):
+    password_parts = []
 
-    # Генерируем пары
-    for a in range(1, 21):  # Первое число в паре
-        if a == n:  # Пропускаем, если a равно n
-            continue
-        for b in range(1, 21):  # Второе число в паре
-            if b == n or a == b:  # Пропускаем, если b равно n или если оба числа одинаковые
-                continue
-            
-            pair_sum = a + b  # Сумма пары
-            
-            # Проверка кратности
-            if n % pair_sum == 0:  
-                result += str(a) + str(b)  # Добавляем к результату в виде строки
+    # Собираем пары чисел
+    for i in range(1, n):  # Первое число от 1 до n-1
+        for j in range(i + 1, n + 1):  # Второе число от (i+1) до n
+            if i + j <= n:
+                password_parts.append(str(i + j))
 
-    return result
+    # Формируем пароль
+    password = ''.join(password_parts)
+    return password
 
-# Пример использования
-print(ancient_cipher(9))  # Ожидается: 1218273645 
-print(ancient_cipher(11))  # Ожидается: 11029384756
+# Генерация паролей для чисел от 3 до 20
+passwords = {}
+for i in range(3, 21):
+    passwords[i] = generate_password(i)
+
+# Вывод результатов
+for key, value in passwords.items():
+    print(f"{key} - {value}")

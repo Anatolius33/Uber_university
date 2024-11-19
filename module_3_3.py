@@ -1,26 +1,18 @@
-def print_params(txt, *args, **kwargs):
-    # Выводим текстовый параметр
-    print(txt)
-    
-    # Выводим аргументы из списка
-    for item in args:
-        print(item, end=' ')
-    
-    # Выводим аргументы из словаря
-    for key, value in kwargs.items():
-        print(f"{key}: {value}", end=' ')
-    
-    print()  # Переход на новую строку после вывода
+# module_3_3.py
 
-# Создаём список с тремя элементами разных типов
-values_list = [54.32, 'Строка', True]
+def print_params(a=1, b='строка', c=True):
+    print(a, b, c)
 
-# Создаём словарь с тремя ключами и значениями разных типов
+# Создание списка с тремя элементами разных типов
+values_list = [3.14, "Hello", False]  # float, string, boolean
+
+# Создание словаря с тремя ключами и значениями разных типов
 values_dict = {
-    'число': 100,
-    'фраза': 'Пример',
-    'логическое': False
+    "a": 42,            # integer
+    "b": "World",      # string
+    "c": None          # NoneType
 }
 
-# Передаём значения в функцию print_params
-print_params('Список параметров:', *values_list, **values_dict)
+# Передаем values_list и values_dict в функцию print_params
+print_params(*values_list)  # Распаковка списка
+print_params(**values_dict)  # Распаковка словаря
